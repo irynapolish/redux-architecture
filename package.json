@@ -13,6 +13,7 @@
     "expo": "^32.0.0",
     "jsdom": "^13.0.0",
     "native-base-shoutem-theme": "^0.2.2",
+    "moment": "^2.22.2",
     "react": "16.2.0",
     "react-dom": "^16.6.3",
     "react-native": "0.52.2",
