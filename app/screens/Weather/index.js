@@ -1,9 +1,10 @@
 import React from 'react';
 import { View, StatusBar, ActivityIndicator, Image, ScrollView, TouchableOpacity } from 'react-native';
 import { Text, Screen, Row, Header, Button } from 'components';
-import styles from './styles';
-import { primary } from 'colors';
 import * as Assets from 'assets';
+import moment from 'moment';
+import styles from './styles';
+import { primary, lightblue } from 'colors';
 
 type Props = {
   error: boolean,
@@ -20,14 +21,13 @@ const getErrorMessage = () => (
 );
 
 const getWeatherInfo = (weatherInfo) => {
-  const { summary, temperature } = weatherInfo;
-
   return (
     <View style={styles.textContainer}>
-      <Text title>{temperature} deg, {summary}</Text>
-      <View style={{ height: 2, backgroundColor: 'lightblue'}} />
-      
-      <Text>cloudCover : {weatherInfo.cloudCover}</Text>
+      <Text title>{weatherInfo.temperature} deg, {weatherInfo.summary}</Text>
+      <Text subheading style={{ marginVertical: 10 }}>{moment(weatherInfo.time).format('lll')}</Text>
+      <View style={{ height: 4, backgroundColor: lightblue}} />
+
+      <Text style={{ marginTop: 10 }}>cloudCover : {weatherInfo.cloudCover}</Text>
       <Text>dewPoint : {weatherInfo.dewPoint}</Text>
       <Text>humidity : {weatherInfo.humidity}</Text>
       <Text>nearest storm bearing : {weatherInfo.nearestStormBearing}</Text>
@@ -70,7 +70,7 @@ const WeatherScreen = (props: Props) => {
           {hasWeatherData ? getWeatherInfo(weatherInfo) : null}
         </View>
       </ScrollView>
-        <View style={{ height: 2, backgroundColor: 'lightblue'}} />
+        <View style={{ height: 2, backgroundColor: lightblue }} />
         <View style={{ alignItems: 'center' }}>
           <Row>
             <TouchableOpacity onPress={fetchData}>
